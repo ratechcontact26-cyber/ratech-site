@@ -1,0 +1,986 @@
+/* =============================================
+   style.css — Le design de mon site personnel
+   Auteur : Ton Nom
+   Version : 1.0
+   ============================================= */
+
+/* ========== 1. VARIABLES CSS (le système de design) ==========
+   Les variables CSS sont comme des "réglages" de ton design.
+   Tu changes une valeur ici, et ça change partout sur le site.
+   C'est une bonne pratique professionnelle.
+*/
+:root {
+  /* Couleurs principales */
+  --color-bg: #080c10;           /* Fond principal (noir profond) */
+  --color-bg-2: #0d1117;         /* Fond secondaire (cartes) */
+  --color-bg-3: #161b22;         /* Fond tertiaire (bordures) */
+
+  --color-accent: #e8ff00;       /* Accent jaune-vert (signature) */
+  --color-accent-2: #00d4aa;     /* Accent secondaire (turquoise) */
+
+  --color-text: #e6edf3;         /* Texte principal (blanc doux) */
+  --color-text-muted: #7d8590;   /* Texte secondaire (gris) */
+  --color-text-faint: #30363d;   /* Texte très discret */
+
+  --color-border: #21262d;       /* Couleur des bordures */
+
+  /* Typographie */
+  --font-display: 'Syne', sans-serif;    /* Pour les titres */
+  --font-body: 'DM Sans', sans-serif;    /* Pour le texte */
+
+  /* Espacements (système cohérent) */
+  --space-xs: 0.5rem;    /*  8px */
+  --space-sm: 1rem;      /* 16px */
+  --space-md: 1.5rem;    /* 24px */
+  --space-lg: 2.5rem;    /* 40px */
+  --space-xl: 4rem;      /* 64px */
+  --space-2xl: 6rem;     /* 96px */
+
+  /* Effets */
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --transition: 0.3s ease;
+
+  /* Largeur max du contenu */
+  --max-width: 1200px;
+}
+
+/* ========== 2. RESET CSS ==========
+   Le navigateur applique ses propres styles par défaut.
+   On les remet à zéro pour partir d'une base propre.
+*/
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;  /* Calcul de taille plus logique */
+}
+
+html {
+  scroll-behavior: smooth;  /* Défilement fluide sur les ancres */
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  overflow-x: hidden;  /* Empêche le scroll horizontal */
+}
+
+/* Liens : on retire le style par défaut */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+/* Listes : on retire les puces par défaut */
+ul {
+  list-style: none;
+}
+
+/* ========== 3. CLASSES UTILITAIRES ==========
+   Des classes réutilisables partout dans le HTML.
+*/
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;           /* Centrer horizontalement */
+  padding: 0 var(--space-md);
+}
+
+.accent {
+  color: var(--color-accent);
+}
+
+/* ========== 4. BOUTONS ========== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.8rem 1.8rem;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  letter-spacing: 0.01em;
+}
+
+/* Bouton principal : fond jaune-vert */
+.btn-primary {
+  background: var(--color-accent);
+  color: #000;
+  font-weight: 700;
+}
+
+.btn-primary:hover {
+  background: #fff;
+  transform: translateY(-2px);  /* Légère élévation au survol */
+  box-shadow: 0 8px 30px rgba(232, 255, 0, 0.3);
+}
+
+/* Bouton secondaire : bordure transparente */
+.btn-outline {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+/* ========== 5. NAVIGATION ========== */
+.navbar {
+  position: fixed;          /* Reste en haut même en scrollant */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;             /* Au-dessus de tout le reste */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem var(--space-lg);
+  background: rgba(8, 12, 16, 0.8);
+  backdrop-filter: blur(12px);      /* Effet verre dépoli */
+  border-bottom: 1px solid var(--color-border);
+  transition: var(--transition);
+}
+
+/* Logo */
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+.nav-logo span {
+  color: var(--color-accent);
+}
+
+/* Liens navigation */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.nav-links a {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.nav-links a:hover {
+  color: var(--color-text);
+}
+
+/* Bouton CTA dans la nav */
+.nav-cta {
+  background: var(--color-accent) !important;
+  color: #000 !important;
+  font-weight: 700 !important;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+}
+
+/* Bouton hamburger (mobile) - caché sur desktop */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* ========== 6. SECTION HERO ========== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  padding: 8rem var(--space-lg) var(--space-xl);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Fond décoratif */
+.hero-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Grille de fond */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(232, 255, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232, 255, 0, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+}
+
+/* Lueur centrale */
+.hero-glow {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 212, 170, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+/* Contenu texte du hero */
+.hero-content {
+  flex: 1;
+  max-width: 600px;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Badge "disponible" */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 212, 170, 0.1);
+  border: 1px solid rgba(0, 212, 170, 0.2);
+  color: var(--color-accent-2);
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  margin-bottom: var(--space-md);
+}
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent-2);
+  animation: pulse 2s infinite;  /* Animation de pulsation */
+}
+
+/* Titre principal */
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5rem); /* Taille fluide selon l'écran */
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--space-md);
+}
+
+.title-line {
+  display: block;
+}
+
+.title-line.accent {
+  color: var(--color-accent);
+}
+
+/* Sous-titre */
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  max-width: 500px;
+  margin-bottom: var(--space-lg);
+}
+
+/* Boutons d'action */
+.hero-actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-xl);
+}
+
+/* Statistiques */
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--color-border);
+}
+
+/* ========== 7. CARTE CODE (visuel du hero) ========== */
+.hero-visual {
+  flex: 0 0 auto;
+  animation: fadeInUp 0.8s 0.2s ease both;
+}
+
+.hero-card {
+  background: var(--color-bg-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  width: 340px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.8rem 1rem;
+  background: var(--color-bg-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Points de couleur style macOS */
+.card-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.card-dots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-text-faint);
+}
+
+.card-dots span:nth-child(1) { background: #ff5f56; }
+.card-dots span:nth-child(2) { background: #ffbd2e; }
+.card-dots span:nth-child(3) { background: #27c93f; }
+
+.card-title {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  font-family: 'Courier New', monospace;
+}
+
+/* Zone de code */
+.card-code {
+  padding: 1.5rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  line-height: 2;
+}
+
+.code-line {
+  display: block;
+}
+
+.code-line.indent {
+  padding-left: 1.5rem;
+}
+
+/* Couleurs syntaxiques */
+.c-tag   { color: #7ee787; }
+.c-attr  { color: #79c0ff; }
+.c-val   { color: #a5d6ff; }
+.c-text  { color: #e6edf3; }
+
+/* Curseur clignotant */
+.code-cursor {
+  display: inline-block;
+  color: var(--color-accent);
+  animation: blink 1s infinite;
+  font-weight: bold;
+}
+
+.card-footer {
+  padding: 0.8rem 1rem;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Tags de technologie */
+.tag-html { background: rgba(240, 80, 50, 0.15); color: #f05032; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+.tag-css  { background: rgba(38, 77, 228, 0.15); color: #264de4; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+.tag-js   { background: rgba(247, 223, 30, 0.15); color: #f7df1e; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+
+/* ========== 8. INDICATEUR DE SCROLL ========== */
+.scroll-indicator {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  animation: bounce 2s infinite;
+}
+
+.scroll-arrow {
+  font-size: 1.2rem;
+}
+
+/* ========== 9. SECTIONS COMMUNES ========== */
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+/* ========== 10. SECTION À PROPOS ========== */
+.about {
+  padding: var(--space-2xl) var(--space-lg);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.about-text p {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+  line-height: 1.8;
+}
+
+.about-text .btn {
+  margin-top: var(--space-md);
+}
+
+/* Grille de compétences */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.skill-tag {
+  background: var(--color-bg-3);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+
+.skill-tag:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* ========== 11. SECTION PROJETS ========== */
+.projects {
+  padding: var(--space-2xl) var(--space-lg);
+  background: var(--color-bg-2);
+}
+
+.projects .container {
+  max-width: var(--max-width);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.project-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  transition: var(--transition);
+}
+
+.project-card:hover {
+  border-color: rgba(232, 255, 0, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Carte mise en avant */
+.project-card.featured {
+  border-color: rgba(232, 255, 0, 0.2);
+  background: linear-gradient(135deg, rgba(232, 255, 0, 0.03), var(--color-bg));
+}
+
+.project-category {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-accent-2);
+  margin-bottom: 0.75rem;
+}
+
+.project-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.project-card p {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+}
+
+/* Tags de projet */
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.project-tags span {
+  background: var(--color-bg-3);
+  color: var(--color-text-muted);
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ========== 12. FOOTER ========== */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.footer-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.footer-logo span {
+  color: var(--color-accent);
+}
+
+.footer-text,
+.footer-copy {
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+/* ========== 13. ANIMATIONS ========== */
+/* Apparition de bas en haut */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Curseur clignotant */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Point de pulsation */
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 212, 170, 0.4); }
+  50%       { box-shadow: 0 0 0 6px rgba(0, 212, 170, 0); }
+}
+
+/* Rebond (scroll indicator) */
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ========== 14. RESPONSIVE DESIGN ==========
+   On adapte le design selon la taille de l'écran.
+   "max-width: 768px" = s'applique sur mobile/tablette.
+*/
+@media (max-width: 1024px) {
+  /* Tablette */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 7rem;
+    min-height: auto;
+    padding-bottom: var(--space-2xl);
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-actions,
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .hero-subtitle {
+    max-width: 100%;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    text-align: center;
+  }
+
+  .skills-grid {
+    justify-content: center;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Mobile */
+
+  /* Navigation : on cache les liens, on affiche le hamburger */
+  .nav-links {
+    display: none;          /* Caché par défaut */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-bg-2);
+    border-bottom: 1px solid var(--color-border);
+    flex-direction: column;
+    padding: var(--space-md);
+    gap: var(--space-sm);
+  }
+
+  /* Quand le menu est ouvert (classe ajoutée par JS) */
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: flex;  /* Afficher le hamburger */
+  }
+
+  .navbar {
+    padding: 1rem var(--space-md);
+    position: relative; /* Pour que le menu dropdown fonctionne */
+  }
+
+  .hero-card {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .hero-stats {
+    gap: var(--space-sm);
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+}
+
+/* ========== SECTION SERVICES ========== */
+.services {
+    padding: var(--space-2xl) var(--space-lg);
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+}
+
+.service-card {
+    background: var(--color-bg-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    border-color: rgba(232, 255, 0, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.service-card.featured {
+    border-color: rgba(232, 255, 0, 0.2);
+    background: linear-gradient(135deg, rgba(232, 255, 0, 0.03), var(--color-bg-2));
+}
+
+.service-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-sm);
+}
+
+.service-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.service-card p {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: var(--space-sm);
+}
+
+.service-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.service-list li {
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.service-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+}
+
+@media (max-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========== BOUTON WHATSAPP FLOTTANT ========== */
+.whatsapp-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    background: #25D366;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transition: var(--transition);
+}
+
+.whatsapp-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(37, 211, 102, 0.6);
+}
+
+.whatsapp-tooltip {
+    position: absolute;
+    right: 70px;
+    background: white;
+    color: #000;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    transition: var(--transition);
+    pointer-events: none;
+}
+
+.whatsapp-btn:hover .whatsapp-tooltip {
+    opacity: 1;
+}
+
+/* ========== BOUTON LANGUE FR/EN ========== */
+.lang-switcher {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    letter-spacing: 0.05em;
+}
+
+.lang-switcher:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+/* ========== SECTION CONTACT ========== */
+.contact {
+    padding: var(--space-2xl) var(--space-lg);
+    background: var(--color-bg-2);
+}
+
+.contact-grid {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+}
+
+.contact-text p {
+    color: var(--color-text-muted);
+    line-height: 1.8;
+    margin-bottom: var(--space-sm);
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1rem 1.2rem;
+    transition: var(--transition);
+}
+
+.contact-card:hover {
+    border-color: var(--color-accent);
+    transform: translateX(6px);
+}
+
+.contact-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    text-align: center;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.contact-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    font-weight: 600;
+}
+
+.contact-value {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    font-weight: 500;
+}
+
+.contact-arrow {
+    color: var(--color-accent);
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.contact-card:hover .contact-arrow {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+}
