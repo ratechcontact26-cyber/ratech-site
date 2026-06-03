@@ -262,3 +262,24 @@ langBtn.addEventListener("click", function () {
   langBtn.textContent = t.langBtn;
 
 });
+/* ========== 7. FORMULAIRE — MESSAGE DE SUCCÈS ========== */
+// Si l'URL contient "?success=true" après soumission
+if (window.location.search === '?success=true') {
+  
+  // Cherche le formulaire
+  const form = document.querySelector('.contact-form');
+  
+  if (form) {
+    // Remplace le formulaire par un message de succès
+    form.innerHTML = `
+      <div style="text-align:center; padding: 2rem;">
+        <div style="font-size:3rem;">🎉</div>
+        <h3 style="color:#e8ff00; font-family:'Syne',sans-serif; margin: 1rem 0;">Message envoyé !</h3>
+        <p style="color:#7d8590;">Merci ! Régis vous répondra rapidement.</p>
+        <a href="/" class="btn btn-primary" style="margin-top:1rem; display:inline-flex;">
+          ← Retour au site
+        </a>
+      </div>
+    `;
+  }
+}
