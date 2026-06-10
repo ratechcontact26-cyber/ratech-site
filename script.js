@@ -249,7 +249,26 @@ langBtn.addEventListener("click", function () {
   document.querySelector(".s4-li1").textContent = t.s4li1;
   document.querySelector(".s4-li2").textContent = t.s4li2;
   document.querySelector(".s4-li3").textContent = t.s4li3;
+// --- GUIDES ---
+  document.querySelector(".blog .section-title").innerHTML = 
+    currentLang === "en" 
+    ? "Learn to diagnose<br>your car <span class='accent'>yourself.</span>"
+    : "Apprenez à diagnostiquer<br>votre voiture <span class='accent'>vous-même.</span>";
 
+  document.querySelector(".blog-subtitle").textContent = 
+    currentLang === "en"
+    ? "Simple technical guides based on my YouTube videos — to save you time and money."
+    : "Des guides techniques simples basés sur mes vidéos YouTube — pour économiser du temps et de l'argent.";
+
+  document.querySelector(".section-label")[4].textContent = 
+    currentLang === "en" ? "Guides & Resources" : "Guides & Ressources";
+    // Boutons des guides
+  document.querySelectorAll(".guide-btn:not(.guide-btn-youtube)").forEach(btn => {
+    btn.textContent = currentLang === "en" ? "▶ Watch video →" : "▶ Voir la vidéo →";
+  });
+
+  document.querySelector(".guide-btn-youtube").textContent = 
+    currentLang === "en" ? "📺 See the channel →" : "📺 Voir la chaîne →";
   // --- CONTACT ---
   document.querySelector(".contact-text .section-title").innerHTML = t.contactTitle;
   document.querySelector(".contact-p1").textContent = t.contactP1;
